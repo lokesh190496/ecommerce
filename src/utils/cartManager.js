@@ -1,3 +1,62 @@
+
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, Link, useParams, useNavigate } from 'react-router-dom';
+
+// Utility functions for localStorage management
+const CartManager = {
+  getCart: () => {
+    const cart = localStorage.getItem('cartItems');
+    return cart ? JSON.parse(cart) : [];
+  },
+  
+  addToCart: (product, quantity = 1) => {
+    const cart = CartManager.getCart();
+    const existingItem = cart.find(item => item.id === product.id);
+    
+    if (existingItem) {
+      existingItem.quantity += quantity;
+    } else {
+      cart.push({ ...product, quantity });
+    }
+    
+    localStorage.setItem('cartItems', JSON.stringify(cart));
+    return cart;
+  },
+  
+  removeFromCart: (productId) => {
+    const cart = CartManager.getCart().filter(item => item.id !== productId);
+    localStorage.setItem('cartItems', JSON.stringify(cart));
+    return cart;
+  },
+  
+  updateQuantity: (productId, quantity) => {
+    const cart = CartManager.getCart();
+    const item = cart.find(item => item.id === productId);
+    if (item) {
+      item.quantity = quantity;
+      if (quantity <= 0) {
+        return CartManager.removeFromCart(productId);
+      }
+    }
+    localStorage.setItem('cartItems', JSON.stringify(cart));
+    return cart;
+  },
+  
+  clearCart: () => {
+    localStorage.removeItem('cartItems');
+    return [];
+  },
+  
+  getCartTotal: () => {
+    return CartManager.getCart().reduce((total, item) => total + (item.price * item.quantity), 0);
+  },
+  
+  getCartItemCount: () => {
+    return CartManager.getCart().reduce((total, item) => total + item.quantity, 0);
+  }
+};
+
+// Enhanced Navbar Component
 function StoreNavbar() {
   const [cartCount, setCartCount] = useState(0);
   const [searchTerm, setSearchTerm] = useState('');

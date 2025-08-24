@@ -1,23 +1,19 @@
-import './App.css'
-import Home from './Pages/Home/Home';
-import StoreNavbar from './Components/Navbar/Navbar';
-import Product from './Pages/Product/Product';
-import CartPage from './Pages/CartPage/Cart';
-import { Routes, Route } from 'react-router-dom';
 function App() {
   return (
-    <div style={{ overflow: 'hidden' }}>
-      <StoreNavbar />
-
-      <Routes>
-        <Route path='/' element={<Home/>} />
-        <Route path='/Product/:id' element={<Product/>} />
-        <Route path='/MyCart' element={<CartPage/>} />
-      </Routes>
-      {/* <Product /> */}
-      {/* <Home /> */}
-    </div>
-  )
+    <Router>
+      <div className="min-h-screen bg-gray-50">
+        <StoreNavbar />
+        
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/product/:id" element={<ProductPage />} />
+          <Route path="/cart" element={<CartPage />} />
+          <Route path="/search" element={<SearchPage />} />
+          <Route path="/wishlist" element={<WishlistPage />} />
+        </Routes>
+      </div>
+    </Router>
+  );
 }
 
-export default App
+export default App;

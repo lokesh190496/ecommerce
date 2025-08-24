@@ -1,475 +1,155 @@
-import './Cart.css';
-import { useEffect, useState } from 'react';
-
 function CartPage() {
-    const [productsInCart, setProductsInCart] = useState([
-        {
-            "id": 1,
-            "title": "Essence Mascara Lash Princess",
-            "description": "The Essence Mascara Lash Princess is a popular mascara known for its volumizing and lengthening effects. Achieve dramatic lashes with this long-lasting and cruelty-free formula.",
-            "category": "beauty",
-            "price": 9.99,
-            "discountPercentage": 10.48,
-            "rating": 2.56,
-            "stock": 99,
-            "tags": [
-                "beauty",
-                "mascara"
-            ],
-            "brand": "Essence",
-            "sku": "BEA-ESS-ESS-001",
-            "weight": 4,
-            "dimensions": {
-                "width": 15.14,
-                "height": 13.08,
-                "depth": 22.99
-            },
-            "warrantyInformation": "1 week warranty",
-            "shippingInformation": "Ships in 3-5 business days",
-            "availabilityStatus": "In Stock",
-            "reviews": [
-                {
-                    "rating": 3,
-                    "comment": "Would not recommend!",
-                    "date": "2025-04-30T09:41:02.053Z",
-                    "reviewerName": "Eleanor Collins",
-                    "reviewerEmail": "eleanor.collins@x.dummyjson.com"
-                },
-                {
-                    "rating": 4,
-                    "comment": "Very satisfied!",
-                    "date": "2025-04-30T09:41:02.053Z",
-                    "reviewerName": "Lucas Gordon",
-                    "reviewerEmail": "lucas.gordon@x.dummyjson.com"
-                },
-                {
-                    "rating": 5,
-                    "comment": "Highly impressed!",
-                    "date": "2025-04-30T09:41:02.053Z",
-                    "reviewerName": "Eleanor Collins",
-                    "reviewerEmail": "eleanor.collins@x.dummyjson.com"
-                }
-            ],
-            "returnPolicy": "No return policy",
-            "minimumOrderQuantity": 48,
-            "meta": {
-                "createdAt": "2025-04-30T09:41:02.053Z",
-                "updatedAt": "2025-04-30T09:41:02.053Z",
-                "barcode": "5784719087687",
-                "qrCode": "https://cdn.dummyjson.com/public/qr-code.png"
-            },
-            "images": [
-                "https://cdn.dummyjson.com/product-images/beauty/essence-mascara-lash-princess/1.webp"
-            ],
-            "thumbnail": "https://cdn.dummyjson.com/product-images/beauty/essence-mascara-lash-princess/thumbnail.webp"
-        },
-        {
-            "id": 2,
-            "title": "Eyeshadow Palette with Mirror",
-            "description": "The Eyeshadow Palette with Mirror offers a versatile range of eyeshadow shades for creating stunning eye looks. With a built-in mirror, it's convenient for on-the-go makeup application.",
-            "category": "beauty",
-            "price": 19.99,
-            "discountPercentage": 18.19,
-            "rating": 2.86,
-            "stock": 34,
-            "tags": [
-                "beauty",
-                "eyeshadow"
-            ],
-            "brand": "Glamour Beauty",
-            "sku": "BEA-GLA-EYE-002",
-            "weight": 9,
-            "dimensions": {
-                "width": 9.26,
-                "height": 22.47,
-                "depth": 27.67
-            },
-            "warrantyInformation": "1 year warranty",
-            "shippingInformation": "Ships in 2 weeks",
-            "availabilityStatus": "In Stock",
-            "reviews": [
-                {
-                    "rating": 5,
-                    "comment": "Great product!",
-                    "date": "2025-04-30T09:41:02.053Z",
-                    "reviewerName": "Savannah Gomez",
-                    "reviewerEmail": "savannah.gomez@x.dummyjson.com"
-                },
-                {
-                    "rating": 4,
-                    "comment": "Awesome product!",
-                    "date": "2025-04-30T09:41:02.053Z",
-                    "reviewerName": "Christian Perez",
-                    "reviewerEmail": "christian.perez@x.dummyjson.com"
-                },
-                {
-                    "rating": 1,
-                    "comment": "Poor quality!",
-                    "date": "2025-04-30T09:41:02.053Z",
-                    "reviewerName": "Nicholas Bailey",
-                    "reviewerEmail": "nicholas.bailey@x.dummyjson.com"
-                }
-            ],
-            "returnPolicy": "7 days return policy",
-            "minimumOrderQuantity": 20,
-            "meta": {
-                "createdAt": "2025-04-30T09:41:02.053Z",
-                "updatedAt": "2025-04-30T09:41:02.053Z",
-                "barcode": "9170275171413",
-                "qrCode": "https://cdn.dummyjson.com/public/qr-code.png"
-            },
-            "images": [
-                "https://cdn.dummyjson.com/product-images/beauty/eyeshadow-palette-with-mirror/1.webp"
-            ],
-            "thumbnail": "https://cdn.dummyjson.com/product-images/beauty/eyeshadow-palette-with-mirror/thumbnail.webp"
-        },
-        {
-            "id": 3,
-            "title": "Powder Canister",
-            "description": "The Powder Canister is a finely milled setting powder designed to set makeup and control shine. With a lightweight and translucent formula, it provides a smooth and matte finish.",
-            "category": "beauty",
-            "price": 14.99,
-            "discountPercentage": 9.84,
-            "rating": 4.64,
-            "stock": 89,
-            "tags": [
-                "beauty",
-                "face powder"
-            ],
-            "brand": "Velvet Touch",
-            "sku": "BEA-VEL-POW-003",
-            "weight": 8,
-            "dimensions": {
-                "width": 29.27,
-                "height": 27.93,
-                "depth": 20.59
-            },
-            "warrantyInformation": "3 months warranty",
-            "shippingInformation": "Ships in 1-2 business days",
-            "availabilityStatus": "In Stock",
-            "reviews": [
-                {
-                    "rating": 4,
-                    "comment": "Would buy again!",
-                    "date": "2025-04-30T09:41:02.053Z",
-                    "reviewerName": "Alexander Jones",
-                    "reviewerEmail": "alexander.jones@x.dummyjson.com"
-                },
-                {
-                    "rating": 5,
-                    "comment": "Highly impressed!",
-                    "date": "2025-04-30T09:41:02.053Z",
-                    "reviewerName": "Elijah Cruz",
-                    "reviewerEmail": "elijah.cruz@x.dummyjson.com"
-                },
-                {
-                    "rating": 1,
-                    "comment": "Very dissatisfied!",
-                    "date": "2025-04-30T09:41:02.053Z",
-                    "reviewerName": "Avery Perez",
-                    "reviewerEmail": "avery.perez@x.dummyjson.com"
-                }
-            ],
-            "returnPolicy": "No return policy",
-            "minimumOrderQuantity": 22,
-            "meta": {
-                "createdAt": "2025-04-30T09:41:02.053Z",
-                "updatedAt": "2025-04-30T09:41:02.053Z",
-                "barcode": "8418883906837",
-                "qrCode": "https://cdn.dummyjson.com/public/qr-code.png"
-            },
-            "images": [
-                "https://cdn.dummyjson.com/product-images/beauty/powder-canister/1.webp"
-            ],
-            "thumbnail": "https://cdn.dummyjson.com/product-images/beauty/powder-canister/thumbnail.webp"
-        },
-        {
-            "id": 4,
-            "title": "Red Lipstick",
-            "description": "The Red Lipstick is a classic and bold choice for adding a pop of color to your lips. With a creamy and pigmented formula, it provides a vibrant and long-lasting finish.",
-            "category": "beauty",
-            "price": 12.99,
-            "discountPercentage": 12.16,
-            "rating": 4.36,
-            "stock": 91,
-            "tags": [
-                "beauty",
-                "lipstick"
-            ],
-            "brand": "Chic Cosmetics",
-            "sku": "BEA-CHI-LIP-004",
-            "weight": 1,
-            "dimensions": {
-                "width": 18.11,
-                "height": 28.38,
-                "depth": 22.17
-            },
-            "warrantyInformation": "3 year warranty",
-            "shippingInformation": "Ships in 1 week",
-            "availabilityStatus": "In Stock",
-            "reviews": [
-                {
-                    "rating": 4,
-                    "comment": "Great product!",
-                    "date": "2025-04-30T09:41:02.053Z",
-                    "reviewerName": "Liam Garcia",
-                    "reviewerEmail": "liam.garcia@x.dummyjson.com"
-                },
-                {
-                    "rating": 5,
-                    "comment": "Great product!",
-                    "date": "2025-04-30T09:41:02.053Z",
-                    "reviewerName": "Ruby Andrews",
-                    "reviewerEmail": "ruby.andrews@x.dummyjson.com"
-                },
-                {
-                    "rating": 5,
-                    "comment": "Would buy again!",
-                    "date": "2025-04-30T09:41:02.053Z",
-                    "reviewerName": "Clara Berry",
-                    "reviewerEmail": "clara.berry@x.dummyjson.com"
-                }
-            ],
-            "returnPolicy": "7 days return policy",
-            "minimumOrderQuantity": 40,
-            "meta": {
-                "createdAt": "2025-04-30T09:41:02.053Z",
-                "updatedAt": "2025-04-30T09:41:02.053Z",
-                "barcode": "9467746727219",
-                "qrCode": "https://cdn.dummyjson.com/public/qr-code.png"
-            },
-            "images": [
-                "https://cdn.dummyjson.com/product-images/beauty/red-lipstick/1.webp"
-            ],
-            "thumbnail": "https://cdn.dummyjson.com/product-images/beauty/red-lipstick/thumbnail.webp"
-        },
-        {
-            "id": 5,
-            "title": "Red Nail Polish",
-            "description": "The Red Nail Polish offers a rich and glossy red hue for vibrant and polished nails. With a quick-drying formula, it provides a salon-quality finish at home.",
-            "category": "beauty",
-            "price": 8.99,
-            "discountPercentage": 11.44,
-            "rating": 4.32,
-            "stock": 79,
-            "tags": [
-                "beauty",
-                "nail polish"
-            ],
-            "brand": "Nail Couture",
-            "sku": "BEA-NAI-NAI-005",
-            "weight": 8,
-            "dimensions": {
-                "width": 21.63,
-                "height": 16.48,
-                "depth": 29.84
-            },
-            "warrantyInformation": "1 month warranty",
-            "shippingInformation": "Ships overnight",
-            "availabilityStatus": "In Stock",
-            "reviews": [
-                {
-                    "rating": 2,
-                    "comment": "Poor quality!",
-                    "date": "2025-04-30T09:41:02.053Z",
-                    "reviewerName": "Benjamin Wilson",
-                    "reviewerEmail": "benjamin.wilson@x.dummyjson.com"
-                },
-                {
-                    "rating": 5,
-                    "comment": "Great product!",
-                    "date": "2025-04-30T09:41:02.053Z",
-                    "reviewerName": "Liam Smith",
-                    "reviewerEmail": "liam.smith@x.dummyjson.com"
-                },
-                {
-                    "rating": 1,
-                    "comment": "Very unhappy with my purchase!",
-                    "date": "2025-04-30T09:41:02.053Z",
-                    "reviewerName": "Clara Berry",
-                    "reviewerEmail": "clara.berry@x.dummyjson.com"
-                }
-            ],
-            "returnPolicy": "No return policy",
-            "minimumOrderQuantity": 22,
-            "meta": {
-                "createdAt": "2025-04-30T09:41:02.053Z",
-                "updatedAt": "2025-04-30T09:41:02.053Z",
-                "barcode": "4063010628104",
-                "qrCode": "https://cdn.dummyjson.com/public/qr-code.png"
-            },
-            "images": [
-                "https://cdn.dummyjson.com/product-images/beauty/red-nail-polish/1.webp"
-            ],
-            "thumbnail": "https://cdn.dummyjson.com/product-images/beauty/red-nail-polish/thumbnail.webp"
-        },
-        {
-            "id": 6,
-            "title": "Calvin Klein CK One",
-            "description": "CK One by Calvin Klein is a classic unisex fragrance, known for its fresh and clean scent. It's a versatile fragrance suitable for everyday wear.",
-            "category": "fragrances",
-            "price": 49.99,
-            "discountPercentage": 1.89,
-            "rating": 4.37,
-            "stock": 29,
-            "tags": [
-                "fragrances",
-                "perfumes"
-            ],
-            "brand": "Calvin Klein",
-            "sku": "FRA-CAL-CAL-006",
-            "weight": 7,
-            "dimensions": {
-                "width": 29.36,
-                "height": 27.76,
-                "depth": 20.72
-            },
-            "warrantyInformation": "1 week warranty",
-            "shippingInformation": "Ships overnight",
-            "availabilityStatus": "In Stock",
-            "reviews": [
-                {
-                    "rating": 2,
-                    "comment": "Very disappointed!",
-                    "date": "2025-04-30T09:41:02.053Z",
-                    "reviewerName": "Layla Young",
-                    "reviewerEmail": "layla.young@x.dummyjson.com"
-                },
-                {
-                    "rating": 4,
-                    "comment": "Fast shipping!",
-                    "date": "2025-04-30T09:41:02.053Z",
-                    "reviewerName": "Daniel Cook",
-                    "reviewerEmail": "daniel.cook@x.dummyjson.com"
-                },
-                {
-                    "rating": 3,
-                    "comment": "Not as described!",
-                    "date": "2025-04-30T09:41:02.053Z",
-                    "reviewerName": "Jacob Cooper",
-                    "reviewerEmail": "jacob.cooper@x.dummyjson.com"
-                }
-            ],
-            "returnPolicy": "90 days return policy",
-            "minimumOrderQuantity": 9,
-            "meta": {
-                "createdAt": "2025-04-30T09:41:02.053Z",
-                "updatedAt": "2025-04-30T09:41:02.053Z",
-                "barcode": "2451534060749",
-                "qrCode": "https://cdn.dummyjson.com/public/qr-code.png"
-            },
-            "images": [
-                "https://cdn.dummyjson.com/product-images/fragrances/calvin-klein-ck-one/1.webp",
-                "https://cdn.dummyjson.com/product-images/fragrances/calvin-klein-ck-one/2.webp",
-                "https://cdn.dummyjson.com/product-images/fragrances/calvin-klein-ck-one/3.webp"
-            ],
-            "thumbnail": "https://cdn.dummyjson.com/product-images/fragrances/calvin-klein-ck-one/thumbnail.webp"
-        },
-        {
-      "id": 7,
-      "title": "Chanel Coco Noir Eau De",
-      "description": "Coco Noir by Chanel is an elegant and mysterious fragrance, featuring notes of grapefruit, rose, and sandalwood. Perfect for evening occasions.",
-      "category": "fragrances",
-      "price": 129.99,
-      "discountPercentage": 16.51,
-      "rating": 4.26,
-      "stock": 58,
-      "tags": [
-        "fragrances",
-        "perfumes"
-      ],
-      "brand": "Chanel",
-      "sku": "FRA-CHA-CHA-007",
-      "weight": 7,
-      "dimensions": {
-        "width": 24.5,
-        "height": 25.7,
-        "depth": 25.98
-      },
-      "warrantyInformation": "3 year warranty",
-      "shippingInformation": "Ships overnight",
-      "availabilityStatus": "In Stock",
-      "reviews": [
-        {
-          "rating": 4,
-          "comment": "Highly impressed!",
-          "date": "2025-04-30T09:41:02.053Z",
-          "reviewerName": "Ruby Andrews",
-          "reviewerEmail": "ruby.andrews@x.dummyjson.com"
-        },
-        {
-          "rating": 5,
-          "comment": "Awesome product!",
-          "date": "2025-04-30T09:41:02.053Z",
-          "reviewerName": "Leah Henderson",
-          "reviewerEmail": "leah.henderson@x.dummyjson.com"
-        },
-        {
-          "rating": 5,
-          "comment": "Very happy with my purchase!",
-          "date": "2025-04-30T09:41:02.053Z",
-          "reviewerName": "Xavier Wright",
-          "reviewerEmail": "xavier.wright@x.dummyjson.com"
-        }
-      ],
-      "returnPolicy": "No return policy",
-      "minimumOrderQuantity": 1,
-      "meta": {
-        "createdAt": "2025-04-30T09:41:02.053Z",
-        "updatedAt": "2025-04-30T09:41:02.053Z",
-        "barcode": "4091737746820",
-        "qrCode": "https://cdn.dummyjson.com/public/qr-code.png"
-      },
-      "images": [
-        "https://cdn.dummyjson.com/product-images/fragrances/chanel-coco-noir-eau-de/1.webp",
-        "https://cdn.dummyjson.com/product-images/fragrances/chanel-coco-noir-eau-de/2.webp",
-        "https://cdn.dummyjson.com/product-images/fragrances/chanel-coco-noir-eau-de/3.webp"
-      ],
-      "thumbnail": "https://cdn.dummyjson.com/product-images/fragrances/chanel-coco-noir-eau-de/thumbnail.webp"
-    },
-    ])
+  const [cartItems, setCartItems] = useState([]);
+  const [showCheckout, setShowCheckout] = useState(false);
 
-    const [orderValue, setOrderValue] = useState(0)
-    useEffect(() => {
-        if (productsInCart && productsInCart.length > 0) {
-            productsInCart.map(product=>{
-                setOrderValue(prev=>prev+product.price)
-            })
-        }
-    }, [])
+  useEffect(() => {
+    setCartItems(CartManager.getCart());
+  }, []);
+
+  const updateQuantity = (productId, newQuantity) => {
+    const updatedCart = CartManager.updateQuantity(productId, newQuantity);
+    setCartItems(updatedCart);
+    window.dispatchEvent(new Event('cartUpdated'));
+  };
+
+  const removeItem = (productId) => {
+    const updatedCart = CartManager.removeFromCart(productId);
+    setCartItems(updatedCart);
+    window.dispatchEvent(new Event('cartUpdated'));
+  };
+
+  const subtotal = cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
+  const shipping = subtotal > 50 ? 0 : 9.99;
+  const tax = subtotal * 0.08;
+  const total = subtotal + shipping + tax;
+
+  if (cartItems.length === 0) {
     return (
-        <div className='d-flex'>
-            <div className='listOfProducts w-75 d-flex flex-column row-gap-3 py-3'>
-                {productsInCart && productsInCart.length > 0 && productsInCart.map((product) => {
-                    return <div className='productInCart'>
-                        <img src={product.thumbnail} alt="" width={'250px'} />
-                        <div className='productInCartDetails'>
-                            <h1>{product.title}</h1>
-                            <h6>{product.description}</h6>
-                            <h6>Quantity 1</h6>
-                        </div>
-                    </div>
-                })}
-            </div>
-            <div className='orderSummary w-25'>
-                <h1>Order Summary</h1>
-                <div className='productsInOrder'>
-                    {productsInCart && productsInCart.length > 0 && productsInCart.map((product) => {
-                        return <div className='d-flex'>
-                            <img src={product.thumbnail} alt="" width={'150px'} />
-                            <div className='productInCartDetails'>
-                                <h1>{product.title}</h1>
-                                <h6>Quantity 1</h6>
-                                <h6>Price: {product.price}</h6>
-                            </div>
-                        </div>
-                    })}
-
-                    <h1>Order Total: ${orderValue}</h1>
-
-                </div>
-            </div>
+      <div className="max-w-7xl mx-auto px-4 py-8">
+        <div className="text-center py-16">
+          <svg className="w-24 h-24 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4m-2.4 0L3 3H1m6 10a2 2 0 100 4 2 2 0 000-4zm10 0a2 2 0 100 4 2 2 0 000-4z" />
+          </svg>
+          <h2 className="text-2xl font-semibold text-gray-900 mb-2">Your cart is empty</h2>
+          <p className="text-gray-600 mb-8">Start shopping to add items to your cart</p>
+          <Link 
+            to="/" 
+            className="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
+          >
+            Continue Shopping
+          </Link>
         </div>
-    )
+      </div>
+    );
+  }
+
+  return (
+    <div className="max-w-7xl mx-auto px-4 py-8">
+      <h1 className="text-3xl font-bold text-gray-900 mb-8">Shopping Cart</h1>
+      
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="lg:col-span-2">
+          <div className="bg-white rounded-lg shadow-md p-6">
+            {cartItems.map((item) => (
+              <div key={item.id} className="flex items-center border-b border-gray-200 py-4 last:border-b-0">
+                <img 
+                  src={item.thumbnail} 
+                  alt={item.title}
+                  className="w-20 h-20 object-cover rounded"
+                />
+                
+                <div className="flex-1 ml-4">
+                  <Link to={`/product/${item.id}`} className="text-lg font-semibold text-gray-900 hover:text-blue-600">
+                    {item.title}
+                  </Link>
+                  <p className="text-gray-600 text-sm mt-1">{item.description.substring(0, 100)}...</p>
+                  <div className="flex items-center mt-2">
+                    <span className="text-lg font-bold text-green-600">${item.price}</span>
+                    {item.discountPercentage > 0 && (
+                      <span className="ml-2 bg-red-100 text-red-800 px-2 py-1 rounded text-xs">
+                        {Math.round(item.discountPercentage)}% OFF
+                      </span>
+                    )}
+                  </div>
+                </div>
+                
+                <div className="flex items-center space-x-2">
+                  <button 
+                    onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                    className="w-8 h-8 rounded-full bg-gray-200 hover:bg-gray-300 flex items-center justify-center"
+                  >
+                    -
+                  </button>
+                  <span className="w-12 text-center">{item.quantity}</span>
+                  <button 
+                    onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                    className="w-8 h-8 rounded-full bg-gray-200 hover:bg-gray-300 flex items-center justify-center"
+                  >
+                    +
+                  </button>
+                </div>
+                
+                <div className="text-right ml-4">
+                  <div className="text-lg font-semibold">${(item.price * item.quantity).toFixed(2)}</div>
+                  <button 
+                    onClick={() => removeItem(item.id)}
+                    className="text-red-600 hover:text-red-800 text-sm mt-1"
+                  >
+                    Remove
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        
+        <div className="lg:col-span-1">
+          <div className="bg-white rounded-lg shadow-md p-6 sticky top-20">
+            <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
+            
+            <div className="space-y-2 mb-4">
+              <div className="flex justify-between">
+                <span>Subtotal</span>
+                <span>${subtotal.toFixed(2)}</span>
+              </div>
+              <div className="flex justify-between">
+                <span>Shipping</span>
+                <span>{shipping === 0 ? 'Free' : `$${shipping.toFixed(2)}`}</span>
+              </div>
+              <div className="flex justify-between">
+                <span>Tax</span>
+                <span>${tax.toFixed(2)}</span>
+              </div>
+              <div className="border-t pt-2 flex justify-between font-semibold text-lg">
+                <span>Total</span>
+                <span>${total.toFixed(2)}</span>
+              </div>
+            </div>
+            
+            {shipping > 0 && (
+              <div className="bg-blue-50 p-3 rounded mb-4">
+                <p className="text-sm text-blue-800">
+                  Add ${(50 - subtotal).toFixed(2)} more for free shipping!
+                </p>
+              </div>
+            )}
+            
+            <button 
+              onClick={() => setShowCheckout(true)}
+              className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors font-semibold"
+            >
+              Proceed to Checkout
+            </button>
+            
+            <Link 
+              to="/" 
+              className="block text-center text-blue-600 hover:text-blue-700 mt-4"
+            >
+              Continue Shopping
+            </Link>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
-export default CartPage;
